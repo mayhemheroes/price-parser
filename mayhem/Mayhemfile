@@ -1,0 +1,9 @@
+project: thefuzz
+target: ratio
+
+testsuite: 
+    - file://./mayhem/corpus/
+
+cmds:
+  - cmd: /price-parser/mayhem/extract-prices.py
+    libfuzzer: true
