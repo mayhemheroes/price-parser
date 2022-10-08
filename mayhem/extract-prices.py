@@ -5,8 +5,6 @@ import sys
 with atheris.instrument_imports():
     from price_parser import Price
 
-@atheris.instrument_func
-def ValidateResult(price):
 
 
 @atheris.instrument_func
@@ -16,7 +14,7 @@ def TestOneInput(data):
 
     if num == 0:
         in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
-        price = Price.fromstring(in_str_1)
+        price = Price.fromString(in_str_1)
 
         if price.amount == None:
             return
@@ -25,12 +23,12 @@ def TestOneInput(data):
             return
 
         assert(type(price.currency) == str, 'currency should be a string')
-        assert(type(price.amount) == float, 'currency should be a float')
+        assert(type(price.amount) == float, 'currency should be a float')        
 
     if num == 1:
         in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
         in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
-        price = Price.fromstring(in_str_1, in_str_2)
+        price = Price.fromString(in_str_1, currency_hint=in_str_2)
 
         if price.amount == None:
             return
@@ -44,8 +42,22 @@ def TestOneInput(data):
     if num == 2:
         in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
         in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
+        price = Price.fromString(in_str_1, decimal_separator=in_str_2)
+
+        if price.amount == None:
+            return
+
+        if price.currency == None:
+            return
+
+        assert(type(price.currency) == str, 'currency should be a string')
+        assert(type(price.amount) == float, 'currency should be a float')
+
+    if num == 3:
+        in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
+        in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
         in_str_3 = fdp.ConsumeUnicodeNoSurrogates(64)
-        price = Price.fromstring(in_str_1, in_str_2, in_str_3)
+        price = Price.fromString(in_str_1, currency_hint=in_str_2,  decimal_separator=in_str_3)
 
         if price.amount == None:
             return
