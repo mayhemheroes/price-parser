@@ -7,14 +7,7 @@ with atheris.instrument_imports():
 
 @atheris.instrument_func
 def ValidateResult(price):
-    if price.amount == None:
-        return
 
-    if price.currency == None:
-        return
-
-    assert(type(price.currency) == str, 'currency should be a string')
-    assert(type(price.amount) == float, 'currency should be a float')
 
 @atheris.instrument_func
 def TestOneInput(data):
@@ -23,18 +16,45 @@ def TestOneInput(data):
 
     if num == 0:
         in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
-        ValidateResult(Price.fromstring(in_str_1))
+        price = Price.fromstring(in_str_1)
+
+        if price.amount == None:
+            return
+
+        if price.currency == None:
+            return
+
+        assert(type(price.currency) == str, 'currency should be a string')
+        assert(type(price.amount) == float, 'currency should be a float')
 
     if num == 1:
         in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
         in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
-        ValidateResult(Price.fromstring(in_str_1, in_str_2))
+        price = Price.fromstring(in_str_1, in_str_2)
+
+        if price.amount == None:
+            return
+
+        if price.currency == None:
+            return
+
+        assert(type(price.currency) == str, 'currency should be a string')
+        assert(type(price.amount) == float, 'currency should be a float')
 
     if num == 2:
         in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
         in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
         in_str_3 = fdp.ConsumeUnicodeNoSurrogates(64)
-        ValidateResult(Price.fromstring(in_str_1, in_str_2, in_str_3))
+        price = Price.fromstring(in_str_1, in_str_2, in_str_3)
+
+        if price.amount == None:
+            return
+
+        if price.currency == None:
+            return
+
+        assert(type(price.currency) == str, 'currency should be a string')
+        assert(type(price.amount) == float, 'currency should be a float')
 
 def main():
     atheris.Setup(sys.argv, TestOneInput)
