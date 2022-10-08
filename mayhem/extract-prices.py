@@ -20,17 +20,23 @@ def ValidateResult(price):
 def TestOneInput(data):
     fdp = atheris.FuzzedDataProvider(data)
     num = fdp.ConsumeIntInRange(0, 2)
-    in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
+    
     in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
     in_str_3 = fdp.ConsumeUnicodeNoSurrogates(64)
 
     if num == 0:
+        in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
         ValidateResult(Price.fromstring(in_str_1))
 
     if num == 1:
+        in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
+        in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
         ValidateResult(Price.fromstring(in_str_1, in_str_2))
 
     if num == 2:
+        in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
+        in_str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
+        in_str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
         ValidateResult(Price.fromstring(in_str_3, in_str_2, in_str_3))
 
 def main():
