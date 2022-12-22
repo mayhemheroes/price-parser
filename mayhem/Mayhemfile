@@ -1,0 +1,6 @@
+project: thefuzz
+target: ratio
+
+cmds:
+  - cmd: /price-parser/mayhem/extract-prices.py
+    libfuzzer: true
