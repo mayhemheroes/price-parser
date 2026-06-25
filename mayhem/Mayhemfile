@@ -1,0 +1,7 @@
+project: price-parser
+target: extract-prices
+testsuite:
+  - file:///mayhem/mayhem/testsuite
+cmds:
+  - cmd: /mayhem/extract-prices
+    libfuzzer: true
